@@ -13,14 +13,6 @@ Population.prototype.show = function() {
   for (let index = 0; index < this.size; index++) {
     this.dots[index].show();
   }
-  const c = document.getElementById('world');
-  const ctx = c.getContext('2d');
-
-  const message = `Dots Alive:${this.dotsAlive}}`;
-  ctx.fillStyle = 'white';
-  ctx.font = '18px Arial';
-  ctx.fillText(message, 0, 590);
-  ctx.fillStyle = 'grey';
 };
 
 Population.prototype.update = function() {

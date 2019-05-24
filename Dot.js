@@ -1,6 +1,6 @@
 const Brain = require('./Brain');
-const { matrixAdd } = require('./math-utils');
-const { screenWidth, screenHeight } = require('./projectConfig');
+const { matrixAdd, distance } = require('./math-utils');
+const { screenWidth, screenHeight, goalPosition, goalRadius } = require('./projectConfig');
 
 // Creating the Dot class.
 function Dot(position = [400, 550]) {
@@ -26,7 +26,8 @@ Dot.prototype.show = function() {
 };
 
 Dot.prototype.update = function() {
-  if (!this.dead) {
+  // If is not dead and haven't touched the goal update it.
+  if (!this.dead && (distance(this.position, goalPosition)>goalRadius)) {
     // Using brain directions to calculate acceleration
     if (this.brain.directions.length > this.brain.steps) {
       this.acceleration = this.brain.directions[this.brain.steps];
@@ -52,6 +53,7 @@ Dot.prototype.update = function() {
       this.dead = true;
       return this.dead; // returning this.dead to keep track of dots that have died.
     }
+
   }
 };
 
