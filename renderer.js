@@ -25,6 +25,8 @@ const period = (1 / frequency)*1000; // ms
 
 setInterval(() => {
   ctx.fillRect(0, 0, 800, 600); //clearing the canvas
+
   dot1.show();
   dot1.move();
+
 }, period);
