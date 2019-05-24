@@ -6,15 +6,17 @@ function Dot(position = [0, 0], velocity, acceleration) {
   this.position = position;
   this.velocity = [0, 0];
   this.acceleration = [0, 0];
-  this.brain = new Brain(400); // Instantiating Brain with a 400 size.
+  const lifeExpectancy = 10; // the number of directions it will change before it dies.
+  this.brain = new Brain(lifeExpectancy); // Instantiating Brain with lifeExpectancy.
+  this.dead = false;
 }
 
 Dot.prototype.show = function() {
-  const c = document.getElementById('root');
+  const c = document.getElementById('world');
   const ctx = c.getContext('2d');
 
   ctx.lineWidth = 2;
-  ctx.strokeStyle = "white";
+  ctx.strokeStyle = this.dead ? "red": "white";
   ctx.beginPath();
   // context.arc(x,y,r,sAngle,eAngle,counterclockwise);
   ctx.arc(this.position[0], this.position[1], this.radius, 0, 2 * Math.PI);
@@ -31,17 +33,27 @@ Dot.prototype.show = function() {
 };
 
 Dot.prototype.move = function() {
-  // Using brain directions to calculate acceleration
-  if (this.brain.directions.length>this.brain.steps){
-    this.acceleration = this.brain.directions[this.brain.steps];
-    this.brain.steps +=1;
-  }
-
-  // adding acceleration to velocity.
-  this.velocity = matrixAdd(this.velocity, this.acceleration);
-  // adding velocity to position.
-  this.position = matrixAdd(this.position, this.velocity);
-
+      // Using brain directions to calculate acceleration
+      if (this.brain.directions.length>this.brain.steps){
+        this.acceleration = this.brain.directions[this.brain.steps];
+        this.brain.steps +=1;
+      }else{
+        // if the Dot runs out of directions it will die
+        this.dead = true
+      }
+      // adding acceleration to velocity.
+      this.velocity = matrixAdd(this.velocity, this.acceleration);
+      // adding velocity to position.
+      this.position = matrixAdd(this.position, this.velocity);
 };
+
+Dot.prototype.update =  function(){
+  if(!this.dead){
+    // const [posx,posy] =  this.position;
+    // // if(posx<2 || posx>canvas.width){
+    // // }
+    this.move();
+  }
+}
 
 module.exports = Dot;

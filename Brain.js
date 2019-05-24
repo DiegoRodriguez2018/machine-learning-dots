@@ -9,15 +9,10 @@ function Brain(size) {
     // getting a random angle from 0 to 2PI (in radians)
     const randomAngle = randomize(2 * Math.PI);
     // calculating a random direction based on randomAngle;
-    const randomDirection = [Math.cos(randomAngle),Math.sin(randomAngle)];
+    const randomDirection = [Math.cos(randomAngle), Math.sin(randomAngle)];
     // adding randomVector to directions
     this.directions.push(randomDirection);
   }
 }
 
-// const c = new Brain(10);
-// console.log('c.directions',': ', typeof c.directions[0][0]);
-
-
 module.exports = Brain;
-
