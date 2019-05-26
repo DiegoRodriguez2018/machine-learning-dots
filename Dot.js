@@ -47,13 +47,7 @@ Dot.prototype.update = function() {
     this.position = matrixAdd(this.position, this.velocity);
 
     // Checking if the dot crashed
-    const [posx, posy] = this.position;
-    if (
-      posx < 2 + this.radius * 2 ||
-      posx > screenWidth - this.radius * 2 ||
-      posy < 2 + this.radius * 2 ||
-      posy > screenHeight - this.radius * 2
-    ) {
+    if (this.itCrashed()) {
       this.status.dead = true;
       return this.status; // returning "status" to keep track of dead and successful Dots.
     }
@@ -65,5 +59,13 @@ Dot.prototype.update = function() {
 
   }
 };
+
+Dot.prototype.itCrashed = function(){
+  const [posX, posY] = this.position;
+  return(posX < 2 + this.radius * 2 ||
+    posX > screenWidth - this.radius * 2 ||
+    posY < 2 + this.radius * 2 ||
+    posY > screenHeight - this.radius * 2);
+}
 
 module.exports = Dot;

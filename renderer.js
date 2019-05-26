@@ -18,14 +18,9 @@ ctx.canvas.height = screenHeight;
 ctx.fillStyle = 'grey';
 ctx.fillRect(0, 0, screenWidth, screenHeight); //clearing the canvas
 
-// 60 hertz
-const frequency = 60;
-const period = (1 / frequency) * 1000; // ms
-
 function showGoal() {
   const c = document.getElementById('world');
   const ctx = c.getContext('2d');
-
   ctx.lineWidth = 15;
   ctx.strokeStyle = 'lightgreen';
   ctx.beginPath();
@@ -33,6 +28,17 @@ function showGoal() {
   ctx.arc(goalPosition[0], goalPosition[1], goalRadius, 0, 2 * Math.PI);
   ctx.stroke();
 }
+
+function showCaptions(message){
+  ctx.fillStyle = 'white';
+  ctx.font = '18px Arial';
+  ctx.fillText(message, 0, 590);
+  ctx.fillStyle = 'grey';
+}
+
+// 60 hertz
+const frequency = 60;
+const period = (1 / frequency) * 1000; // ms
 
 let gen = 1;
 let init = true;
@@ -57,10 +63,8 @@ setInterval(() => {
     showGoal();
     population.show();
     population.update();
+    // Message to show
     const message = `Dots Alive:${population.dotsAlive}, Dots Successful:${population.dotsSuccessful},Generation: ${gen}`;
-    ctx.fillStyle = 'white';
-    ctx.font = '18px Arial';
-    ctx.fillText(message, 0, 590);
-    ctx.fillStyle = 'grey';
+    showCaptions(message);
   }
 }, period);

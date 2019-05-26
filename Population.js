@@ -18,19 +18,17 @@ Population.prototype.show = function() {
 
 Population.prototype.update = function() {
   for (let index = 0; index < this.size; index++) {
-    // calling update, if the return value is true the dot died.  
-    const status = this.dots[index].update(); 
+    // calling update, if the return value is true the dot died.
+    const status = this.dots[index].update();
     // console.log("status:",status);
-    if (status){
+    if (status) {
       if (status.dead) {
         this.dotsAlive--;
-      }
-      if (status.successful){
+      } else if (status.successful) {
         this.dotsSuccessful++;
       }
     }
   }
 };
-
 
 module.exports = Population;
