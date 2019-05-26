@@ -7,6 +7,7 @@ function Population(size) {
     this.dots.push(new Dot());
   }
   this.dotsAlive = size;
+  this.dotsSuccessful = 0;
 }
 
 Population.prototype.show = function() {
@@ -18,9 +19,15 @@ Population.prototype.show = function() {
 Population.prototype.update = function() {
   for (let index = 0; index < this.size; index++) {
     // calling update, if the return value is true the dot died.  
-    const itDied = this.dots[index].update(); 
-    if (itDied) {
-      this.dotsAlive--;
+    const status = this.dots[index].update(); 
+    // console.log("status:",status);
+    if (status){
+      if (status.dead) {
+        this.dotsAlive--;
+      }
+      if (status.successful){
+        this.dotsSuccessful++;
+      }
     }
   }
 };
