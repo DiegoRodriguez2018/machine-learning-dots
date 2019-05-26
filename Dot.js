@@ -11,6 +11,7 @@ function Dot(position = [400, 550]) {
   const lifeExpectancy = 300; // the number of directions it will change before it dies.
   this.brain = new Brain(lifeExpectancy); // Instantiating Brain with lifeExpectancy.
   this.dead = false;
+  this.successful = false;
 }
 
 Dot.prototype.show = function() {
@@ -27,7 +28,7 @@ Dot.prototype.show = function() {
 
 Dot.prototype.update = function() {
   // If is not dead and haven't touched the goal update it.
-  if (!this.dead && (distance(this.position, goalPosition)>goalRadius)) {
+  if (!this.dead && !this.successful) {
     // Using brain directions to calculate acceleration
     if (this.brain.directions.length > this.brain.steps) {
       this.acceleration = this.brain.directions[this.brain.steps];
@@ -52,6 +53,11 @@ Dot.prototype.update = function() {
     ) {
       this.dead = true;
       return this.dead; // returning this.dead to keep track of dots that have died.
+    }
+
+    if (distance(this.position, goalPosition)<=goalRadius) {
+      this.successful = true;
+      return this.successful;
     }
 
   }
