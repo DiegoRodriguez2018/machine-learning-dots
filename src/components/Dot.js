@@ -1,6 +1,6 @@
 const Brain = require('./Brain');
-const { matrixAdd, distance } = require('./math-utils');
-const { screenWidth, screenHeight, goalPosition, goalRadius } = require('./projectConfig');
+const { matrixAdd, distance } = require('../helpers/math-utils');
+const { screenWidth, screenHeight, goalPosition, goalRadius } = require('../projectConfig');
 
 // Creating the Dot class.
 function Dot(position = [400, 250]) {

@@ -1,4 +1,4 @@
-const { randomize } = require('./math-utils');
+const { randomize } = require('../helpers/math-utils');
 /**
  * @param size - the number of possible directions the brain calculates
  */

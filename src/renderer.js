@@ -1,14 +1,14 @@
 // This file is required by the index.html file and will
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
-console.log('hi from renderer');
 const {
   screenWidth,
   screenHeight,
   goalPosition,
   goalRadius
 } = require('./projectConfig');
-const Population = require('./Population');
+
+const Population = require('./components/Population');
 
 const c = document.getElementById('world');
 const ctx = c.getContext('2d');
